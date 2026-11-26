@@ -20,6 +20,12 @@ if (ENTRY.length === 0 || ENTRY.trim().length === 0) {
 if (ENTRY.includes("\n") || ENTRY.includes("\r")) {
   throw new Error("entry must be a single line");
 }
+if (ENTRY !== ENTRY.trim()) {
+  throw new Error("entry must not have leading or trailing whitespace");
+}
+if (/\s{2,}/.test(ENTRY)) {
+  throw new Error("entry must not contain doubled whitespace");
+}
 if (codePoints < 1 || codePoints > 199) {
   throw new Error(
     `entry must be 1-199 characters (code points), got ${codePoints}`,
